@@ -360,6 +360,18 @@ img {
   width: 95%;
 }
 
+.skills__node {
+  width: 70%;
+}
+
+.skills__react {
+  width: 80%;
+}
+
+.skills__java {
+  width: 75%;
+}
+
 .skills__img {
   border-radius: .5rem;
   width: 250px;
@@ -404,6 +416,7 @@ img {
   font-size: var(--normal-font-size);
   cursor: pointer;
   margin-left: auto;
+  margin-right: auto;
 }
 
 /* ===== FOOTER =====*/
