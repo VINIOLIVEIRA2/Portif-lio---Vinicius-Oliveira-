@@ -293,6 +293,10 @@ img {
   border-radius: .5rem;
 }
 
+.about__button {
+  margin-top: var(--mb-4);
+}
+
 /* ===== SKILLS =====*/
 .skills__container {
   row-gap: 2rem;
