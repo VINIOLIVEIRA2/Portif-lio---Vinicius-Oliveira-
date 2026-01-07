@@ -276,6 +276,10 @@ img {
   text-align: center;
 }
 
+.about {
+  background-color: hsl(var(--hue-color), 16%, 95%); /* Cinza claro */
+}
+
 .about__subtitle {
   margin-bottom: var(--mb-2);
 }
@@ -384,6 +388,10 @@ img {
 }
 
 /* ===== WORK =====*/
+.work {
+  background-color: hsl(var(--hue-color), 16%, 95%); /* Cinza claro */
+}
+
 .work__container {
   row-gap: 2rem;
 }
