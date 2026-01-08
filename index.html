@@ -54,7 +54,7 @@
         <div class="home__data">
           <h1 class="home__title">
             Olá,<br />Eu sou <span class="home__title-color"> Vini</span><br />
-            Desenvolverdor <br> <span class="home__title-color">Software</span>
+            Desenvolvedor <br> <span class="home__title-color">Software</span>
           </h1>
         </div>
 
@@ -262,17 +262,19 @@
         <h2 class="section-title">Contact</h2>
 
         <div class="contact__container bd-grid">
-          <form action="" class="contact__form">
-            <input type="text" placeholder="Name" class="contact__input" />
-            <input type="mail" placeholder="Email" class="contact__input" />
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact__form">
+            <input type="text" name="name" placeholder="Name" class="contact__input" required />
+            <input type="email" name="email" placeholder="Email" class="contact__input" required />
             <textarea
-              name=""
+              name="message"
               id=""
               cols="0"
               rows="10"
               class="contact__input"
+              placeholder="Your message"
+              required
             ></textarea>
-            <input type="button" value="Send" class="contact__button button" />
+            <input type="submit" value="Send" class="contact__button button" />
           </form>
         </div>
       </section>
