@@ -112,6 +112,7 @@ img {
   width: 100%;
   position: fixed;
   top: 0;
+
   left: 0;
   z-index: var(--z-fixed);
   background-color: #fff;
@@ -138,6 +139,7 @@ img {
     background-color: var(--second-color);
     transition: .5s;
   }
+    
 }
 
 .nav__item {
@@ -470,6 +472,22 @@ img {
 
 /* ===== MEDIA QUERIES=====*/
 @media screen and (max-width: 320px) {
+  .nav__menu {
+   position: fixed;
+   top: var(--header-height);
+   right: -100;
+   width: 80%;
+   height: 100%;
+   padding: 2rem;
+   background-color: var(--second-color);
+   transition: .5s;
+
+  }
+
+  .home__social-icon {
+    font-size: 50.2rem;
+  }
+
   /* Small mobile adjustments if needed */
 }
 
@@ -617,5 +635,12 @@ img {
 
   .home__img {
     width: 450px;
+  }
+}
+
+/* ===== AJUSTE ICONES MOBILE ===== */
+@media screen and (max-width: 767px) {
+  .home__social-icon {
+    font-size: 2.5rem; /* <-- Altere este valor para o tamanho desejado */
   }
 }
