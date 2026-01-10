@@ -570,9 +570,10 @@ img {
   .home__img {
     order: 0;
     grid-column: 2 / 3;
-    grid-row: 1 / 4; /* Make image span all 3 rows */
+    grid-row: 1 / 2;
     width: 400px;
-    justify-self: center;
+    justify-self: end;
+    align-self: center;
   }
   
   .about__container {
