@@ -570,7 +570,7 @@ img {
   .home__img {
     order: 0;
     grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    grid-row: 1 / 4;
     width: 400px;
     justify-self: end;
     align-self: center;
