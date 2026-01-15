@@ -394,22 +394,32 @@ img {
 }
 
 .work__container {
-  justify-content: center;
-  padding: 2rem 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory; /* Optional: for snapping effect */
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+}
+
+/* Hide scrollbar for a cleaner look */
+.work__container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Base styles for the card link */
 .work__card {
   display: block;
   position: relative;
-  border-radius: 1.5rem; /* More pronounced radius */
+  border-radius: 1.5rem;
   overflow: hidden;
   box-shadow: 0 10px 30px hsla(var(--hue-color), 20%, 15%, 0.2);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
               box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: #fff;
-  max-width: 420px; /* Max width for the card */
-  margin: 0 auto; /* Center the card in the grid cell */
+  width: 280px; /* Give a fixed width to cards */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  scroll-snap-align: start; /* Optional: for snapping effect */
 }
 
 .work__card:hover {
@@ -560,9 +570,17 @@ img {
   }
 
   .work__container {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
-    padding-top: 2rem;
+    padding: 2rem;
+    overflow-x: visible;
+  }
+
+  .work__card {
+    width: auto;
+    max-width: 420px;
+    margin: 0 auto;
   }
 
   .contact__form {
