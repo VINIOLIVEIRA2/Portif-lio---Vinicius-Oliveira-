@@ -667,6 +667,7 @@ img {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
     justify-self: start;
+    margin-top: var(--mb-6);
   }
 
   .home__img {
@@ -712,6 +713,7 @@ img {
     width: 450px;
   }
 }
+
 .home__social-icon {
   font-size: 2.5rem;
   color: var(--second-color);
