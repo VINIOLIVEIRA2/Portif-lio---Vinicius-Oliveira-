@@ -55,4 +55,21 @@ sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{});
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 200}); 
 sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
 sr.reveal('.skills__data, .work__img, .contact__input',{interval: 100}); 
+
+/*===== WORK CAROUSEL ARROWS =====*/
+const workCarousel = document.getElementById('work-carousel');
+const workArrowLeft = document.querySelector('.work__arrow--left');
+const workArrowRight = document.querySelector('.work__arrow--right');
+
+if (workCarousel && workArrowLeft && workArrowRight) {
+    const getScrollAmount = () => Math.round(workCarousel.clientWidth * 0.8);
+
+    workArrowLeft.addEventListener('click', () => {
+        workCarousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    });
+
+    workArrowRight.addEventListener('click', () => {
+        workCarousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    });
+}
                         
