@@ -50,6 +50,31 @@ body {
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   color: var(--second-color);
+  position: relative;
+}
+
+#home {
+  position: relative;
+}
+
+.particles-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.particles-layer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+#home > :not(.particles-layer) {
+  position: relative;
+  z-index: 1;
 }
 
 h1, h2, p {
@@ -251,7 +276,6 @@ img {
 }
 
 
-
 .button:hover {
   box-shadow: 0px 10px 36px rgba(0, 0, 0, 0.15);
 }
@@ -400,6 +424,7 @@ img {
   gap: 1.5rem;
   padding: 2rem 1.5rem 2.5rem;
   -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+  width: 100%;
 }
 
 /* Hide scrollbar for a cleaner look */
@@ -415,20 +440,27 @@ img {
   position: relative;
   display: flex;
   align-items: center;
+  --work-card-width: 280px;
+  --work-card-gap: 1.5rem;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .work__arrow {
-  border: 0;
-  background: hsla(var(--hue-color), 28%, 15%, 0.85);
-  color: #fff;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  border: 1px solid hsla(var(--hue-color), 40%, 30%, 0.2);
+  background: hsla(0, 0%, 100%, 0.55);
+  color: var(--second-color);
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
   display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 12px 30px hsla(var(--hue-color), 20%, 20%, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -436,11 +468,14 @@ img {
 }
 
 .work__arrow:hover {
-  background: hsla(var(--hue-color), 28%, 15%, 0.95);
+  transform: translateY(-50%) translateZ(0) scale(1.03);
+  border-color: hsla(var(--hue-color), 70%, 55%, 0.35);
+  background: hsla(0, 0%, 100%, 0.75);
+  box-shadow: 0 16px 36px hsla(var(--hue-color), 20%, 20%, 0.25);
 }
 
 .work__arrow:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.98);
 }
 
 .work__arrow--left {
@@ -452,7 +487,7 @@ img {
 }
 
 .work__arrow i {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 }
 
 /* Base styles for the card link */
@@ -465,7 +500,7 @@ img {
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
               box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: #fff;
-  width: 280px;
+  width: var(--work-card-width);
   flex-shrink: 0;
   scroll-snap-align: start; /* Optional: for snapping effect */
 }
@@ -594,6 +629,18 @@ img {
   font-size: 1.5rem;
   color: #fff;
   margin: 0 var(--mb-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.footer__icon svg {
+  width: 0.9em;
+  height: 0.9em;
+  fill: currentColor;
+  display: block;
+  transform: translateY(0.02em);
 }
 
 .footer__copy {
@@ -692,9 +739,13 @@ img {
     grid-row: 3 / 4;
     display: flex;
     align-items: center;
-    column-gap: var(--mb-4);
+    column-gap: 46px;
     justify-self: start;
+    justify-content: center;
+    width: 12rem;
+    margin-top: -47px;
   }
+
 
   .home__button {
     order: 0;
@@ -734,8 +785,18 @@ img {
   }
 
   .work__container {
-    padding-left: 3.5rem;
-    padding-right: 3.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .work__carousel {
+    width: min(
+      100%,
+      calc((4 * var(--work-card-width)) + (3 * var(--work-card-gap)))
+    );
   }
 }
 
@@ -755,7 +816,7 @@ img {
 }
 
 .home__social-icon {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: var(--second-color);
 }
 
@@ -797,4 +858,13 @@ img {
 .button:active {
   transform: scale(0.98);
   box-shadow: 0 0.5em 1.5em -0.5em hsla(249, 62%, 51%, 0.745);
+}
+
+#paricles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: var(--z-back);
 }

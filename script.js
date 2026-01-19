@@ -72,4 +72,42 @@ if (workCarousel && workArrowLeft && workArrowRight) {
         workCarousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
 }
-                        
+
+/*===== PARTICLES BACKGROUND =====*/
+const initParticles = (containerId) => {
+    if (!window.particlesJS || !document.getElementById(containerId)) {
+        return;
+    }
+
+    particlesJS(containerId, {
+        particles: {
+            number: { value: 120 },
+            color: { value: ["#3b82f6", "#7c3aed"] },
+            opacity: { value: 0.85, random: true },
+            size: { value: 10, random: true },
+            line_linked: {
+                enable: true,
+                color: "#5f76ff",
+                distance: 140,
+                opacity: 0.5,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 6
+            }
+        },
+        interactivity: {
+            events: {
+                onhover: { enable: true, mode: "repulse" },
+                resize: true
+            },
+            modes: {
+                repulse: { distance: 100, duration: 0.4 }
+            }
+        },
+        retina_detect: true
+    });
+};
+
+initParticles("particles-home");
