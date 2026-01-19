@@ -81,9 +81,9 @@ const initParticles = (containerId) => {
 
     particlesJS(containerId, {
         particles: {
-            number: { value: 120 },
+            number: { value: 100 },
             color: { value: ["#3b82f6", "#7c3aed"] },
-            opacity: { value: 0.85, random: true },
+            opacity: { value: 0.5, random: true },
             size: { value: 10, random: true },
             line_linked: {
                 enable: true,
