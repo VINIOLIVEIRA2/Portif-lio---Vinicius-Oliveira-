@@ -14,6 +14,7 @@
     <title>Portfolio website | Coders_Section</title>
   </head>
   <body>
+    <div id="particles-bg" class="particles-layer"></div>
     <!--===== HEADER =====-->
     <header class="l-header">
       <nav class="nav bd-grid">
@@ -51,10 +52,11 @@
     <main class="l-main">
       <!--===== HOME =====-->
       <section class="home bd-grid" id="home">
-        <div id="particles-home" class="particles-layer"></div>
         <div class="home__data">
           <h1 class="home__title">
-            Olá,<br />Eu sou <span class="home__title-color">Vini</span><br />
+            <span class="home__title-floating">
+              Olá,<br />Eu sou <span class="home__title-color">Vini</span>
+            </span><br />
             <span id="typed-text"></span>
           </h1>
         </div>
@@ -66,7 +68,7 @@
           <a href="https://github.com/VINIOLIVEIRA2" class="home__social-icon"><i class="bx bxl-github"></i></a>
         </div>
 
-        <img class="home__img" src="Imagens/Vini - Cartoon.png" alt="Vinicius Oliveira">
+        <img class="home__img" src="Imagens/Design sem nome (12).png" alt="Vinicius Oliveira">
       </section>
 
       <!--===== ABOUT =====-->
@@ -247,6 +249,23 @@
             </div>
           </div>
           <div class="work__card">
+            <img src="Imagens/Chatbot WhatsApp.png" alt="Chatbot WhatsApp" class="work__card-img" />
+            <div class="work__card-data">
+              <h3 class="work__card-title">Chatbot WhatsApp</h3>
+              <p class="work__card-description">
+                Atendimento automatizado via WhatsApp para clientes.
+              </p>
+              <div class="work__card-links">
+                <a href="https://github.com/VINIOLIVEIRA2/Chatbot-WhatsApp.git" target="_blank" rel="noopener noreferrer" class="work__card-link-item">
+                  <i class='bx bxl-github'></i>
+                </a>
+                <a href="chatbot_whatsapp_info.html" target="_blank" rel="noopener noreferrer" class="work__card-link-item">
+                  <i class='bx bx-link-external'></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="work__card">
             <img src="Imagens/Disney Plus.png" alt="Streaming Disney+" class="work__card-img" />
             <div class="work__card-data">
               <h3 class="work__card-title">Streaming Disney+</h3>
@@ -280,23 +299,6 @@
               </div>
             </div>
           </div>
-          <div class="work__card">
-            <img src="Imagens/Chatbot WhatsApp.png" alt="Chatbot WhatsApp" class="work__card-img" />
-            <div class="work__card-data">
-              <h3 class="work__card-title">Chatbot WhatsApp</h3>
-              <p class="work__card-description">
-                Atendimento automatizado via WhatsApp para clientes.
-              </p>
-              <div class="work__card-links">
-                <a href="https://github.com/VINIOLIVEIRA2/Chatbot-WhatsApp.git" target="_blank" rel="noopener noreferrer" class="work__card-link-item">
-                  <i class='bx bxl-github'></i>
-                </a>
-                <a href="chatbot_whatsapp_info.html" target="_blank" rel="noopener noreferrer" class="work__card-link-item">
-                  <i class='bx bx-link-external'></i>
-                </a>
-              </div>
-            </div>
-          </div>
           </div>
           <button class="work__arrow work__arrow--right" type="button" aria-label="Ver proximos projetos">
             <i class='bx bx-chevron-right'></i>
@@ -310,16 +312,37 @@
 
         <div class="contact__container bd-grid">
           <form action="" class="contact__form">
-            <input type="text" placeholder="Nome" class="contact__input" />
-            <input type="mail" placeholder="Email" class="contact__input" />
-            <textarea
-              name=""
-              id=""
-              cols="0"
-              rows="10"
-              class="contact__input"
-              placeholder=""
-            ></textarea>
+
+            <div class="glowing-input-container">
+              <div class="glow"></div>
+              <div class="darkBorderBg"></div>
+              <div class="white"></div>
+              <div class="border"></div>
+              <div class="glowing-input-main">
+                <input type="text" placeholder="Nome" class="contact__input" />
+              </div>
+            </div>
+
+            <div class="glowing-input-container">
+              <div class="glow"></div>
+              <div class="darkBorderBg"></div>
+              <div class="white"></div>
+              <div class="border"></div>
+              <div class="glowing-input-main">
+                <input type="mail" placeholder="Email" class="contact__input" />
+              </div>
+            </div>
+
+            <div class="glowing-input-container">
+              <div class="glow"></div>
+              <div class="darkBorderBg"></div>
+              <div class="white"></div>
+              <div class="border"></div>
+              <div class="glowing-input-main">
+                <textarea name="" id="" cols="0" rows="10" class="contact__input" placeholder="Sua mensagem"></textarea>
+              </div>
+            </div>
+
             <input type="button" value="Send" class="contact__button button" />
           </form>
         </div>
@@ -339,6 +362,9 @@
       </div>
       <p class="footer__copy">&#169; All rigths reserved</p>
     </footer>
+
+    <!--===== ANIMAÇÃO DE PARTÍCULAS =====-->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
     <!--===== ANIMAÇÃO DE TEXTO =====-->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>

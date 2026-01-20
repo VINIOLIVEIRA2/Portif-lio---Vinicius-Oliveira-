@@ -58,12 +58,13 @@ body {
 }
 
 .particles-layer {
-  position: absolute;
+  position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: var(--z-back);
   pointer-events: none;
+  display: none;
 }
 
 .particles-layer canvas {
@@ -216,6 +217,11 @@ img {
 
 /*===== HOME =====*/
 .home {
+  position: relative; /* Garante o contexto para o z-index dos filhos */
+  background-image: url("Imagens/Network.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,12 +234,12 @@ img {
   order: 2;
 }
 
-.home__img {
-  width: 305px;
-}
-
 .home__button {
   order: 3;
+}
+
+.home__img {
+  width: 305px;
 }
 
 .home__social {
@@ -247,6 +253,11 @@ img {
   font-size: var(--big-font-size);
   line-height: 1.2;
   margin-bottom: var(--mb-4);
+}
+
+.home__title-floating {
+  display: inline-block; /* Necessário para aplicar transformações */
+  animation: float 3s ease-in-out infinite;
 }
 
 
@@ -437,6 +448,7 @@ img {
 }
 
 .work__carousel {
+  perspective: 1000px;
   position: relative;
   display: flex;
   align-items: center;
@@ -873,4 +885,217 @@ img {
 .typed-cursor {
   color: var(--first-color);
 }
+
+/* ===== ANIMATED CONTACT FORM (Refined) ===== */
+.glowing-input-container {
+  position: relative;
+  margin-bottom: var(--mb-4); /* Mantém o espaçamento original */
+}
+
+.glowing-input-main {
+  position: relative;
+  z-index: 1;
+}
+
+.glowing-input-container .contact__input {
+  border: 1px solid #e0e0e0; /* Borda sutil padrão */
+  margin-bottom: 0; 
+  position: relative;
+  z-index: 1; 
+  background-color: #fff; /* Fundo branco */
+  color: var(--second-color); /* Texto escuro */
+  padding-inline: 1rem; 
+  font-size: var(--normal-font-size);
+  width: 100%;
+  border-radius: .5rem; /* Mantém o border-radius original */
+  transition: border-color 0.3s;
+}
+
+.glowing-input-container:focus-within .contact__input {
+  border-color: transparent; /* Remove a borda para o glow aparecer */
+  outline: none;
+}
+
+.glowing-input-container .contact__input::placeholder {
+  color: #aaa;
+}
+
+/* Base para os elementos de efeito (invisíveis por padrão) */
+.white,
+.border,
+.darkBorderBg,
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 12px;
+  filter: blur(3px);
+  opacity: 0; /* Começa invisível */
+  transition: opacity 0.4s;
+}
+
+/* Mostra os efeitos no focus-within */
+.glowing-input-container:focus-within .white,
+.glowing-input-container:focus-within .border,
+.glowing-input-container:focus-within .darkBorderBg,
+.glowing-input-container:focus-within .glow {
+    opacity: 1;
+}
+
+
+/* Ajustes específicos para cada camada de efeito */
+.white {
+  border-radius: 10px;
+  filter: blur(2px);
+}
+
+.white::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(83deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  filter: brightness(1.4);
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    #a099d8,
+    rgba(0, 0, 0, 0) 8%,
+    rgba(0, 0, 0, 0) 50%,
+    #dfa2da,
+    rgba(0, 0, 0, 0) 58%
+  );
+  transition: all 2s;
+}
+
+.border {
+  border-radius: 11px;
+  filter: blur(0.5px);
+}
+
+.border::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(70deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  filter: brightness(1.3);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    #f0f0f0, /* Cor clara */
+    #402fb5 5%,
+    #f0f0f0 14%,
+    #f0f0f0 50%,
+    #cf30aa 60%,
+    #f0f0f0 64%
+  );
+  transition: all 2s;
+}
+
+.darkBorderBg {
+    border-radius: 12px;
+}
+
+.darkBorderBg::before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(82deg);
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    rgba(0, 0, 0, 0),
+    #18116a,
+    rgba(0, 0, 0, 0) 10%,
+    rgba(0, 0, 0, 0) 50%,
+    #6e1b60,
+    rgba(0, 0, 0, 0) 60%
+  );
+  transition: all 2s;
+}
+
+.glow {
+  overflow: hidden;
+  filter: blur(20px); /* Reduzido o blur para ficar mais nítido */
+  opacity: 0; /* Começa invisível, aparece no focus */
+  border-radius: 12px;
+}
+
+.glowing-input-container:focus-within .glow {
+    opacity: 0.7; /* Opacidade do brilho no focus */
+}
+
+.glow:before {
+  content: "";
+  z-index: -2;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(60deg);
+  position: absolute;
+  width: 999px;
+  height: 999px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-image: conic-gradient(
+    transparent,
+    #402fb5 5%,
+    transparent 38%,
+    transparent 50%,
+    #cf30aa 60%,
+    transparent 87%
+  );
+  transition: all 2s;
+}
+
+/* Animações no focus */
+.glowing-input-container:focus-within > .darkBorderBg::before {
+  transform: translate(-50%, -50%) rotate(442deg);
+  transition: all 4s;
+}
+.glowing-input-container:focus-within > .glow::before {
+  transform: translate(-50%, -50%) rotate(420deg);
+  transition: all 4s;
+}
+.glowing-input-container:focus-within > .white::before {
+  transform: translate(-50%, -50%) rotate(443deg);
+  transition: all 4s;
+}
+.glowing-input-container:focus-within > .border::before {
+  transform: translate(-50%, -50%) rotate(430deg);
+  transition: all 4s;
+}
+
+/* Ajustes para o Textarea */
+.glowing-input-container .contact__input[rows] {
+  resize: vertical; 
+  min-height: 150px; 
+  padding-top: 1rem;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
 
