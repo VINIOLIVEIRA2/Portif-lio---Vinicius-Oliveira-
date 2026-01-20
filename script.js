@@ -1,5 +1,4 @@
-
-/*===== MENU SHOW =====*/ 
+/*===== MENU SHOW =====*/
 const showMenu = (toggleId, navId) =>{
     const toggle = document.getElementById(toggleId),
     nav = document.getElementById(navId)
@@ -73,41 +72,17 @@ if (workCarousel && workArrowLeft && workArrowRight) {
     });
 }
 
-/*===== PARTICLES BACKGROUND =====*/
-const initParticles = (containerId) => {
-    if (!window.particlesJS || !document.getElementById(containerId)) {
-        return;
-    }
-
-    particlesJS(containerId, {
-        particles: {
-            number: { value: 100 },
-            color: { value: ["#3b82f6", "#7c3aed"] },
-            opacity: { value: 0.5, random: true },
-            size: { value: 10, random: true },
-            line_linked: {
-                enable: true,
-                color: "#5f76ff",
-                distance: 140,
-                opacity: 0.5,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 6
-            }
-        },
-        interactivity: {
-            events: {
-                onhover: { enable: true, mode: "repulse" },
-                resize: true
-            },
-            modes: {
-                repulse: { distance: 100, duration: 0.4 }
-            }
-        },
-        retina_detect: true
+/*===== TYPED.JS HOME ANIMATION =====*/
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('typed-text')) {
+    new Typed('#typed-text', {
+      strings: ['Desenvolvedor <span class="home__title-color">Full Stack</span>', 'Engenheiro de <span class="home__title-color">Software</span>', 'Data <span class="home__title-color">Analyst</span>'],
+      typeSpeed: 70,
+      backSpeed: 50,
+      backDelay: 1500,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|',
     });
-};
-
-initParticles("particles-home");
+  }
+});

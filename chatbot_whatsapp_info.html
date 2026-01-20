@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot WhatsApp - Bot de emprestimo/renegociacao (MVP)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="l-main">
+      <section class="about section" id="chatbot-whatsapp">
+        <h2 class="section-title">Chatbot WhatsApp</h2>
+
+        <div class="about__container bd-grid">
+          <div>
+            <h2 class="about__subtitle">Bot de emprestimo/renegociacao (MVP)</h2>
+            <p class="about__text">
+              Este MVP tem duas formas de uso:
+            </p>
+            <p class="about__text">
+              - Terminal: fluxo simples no console.<br />
+              - Web: interface com chat no navegador.
+            </p>
+
+            <h2 class="about__subtitle">Como executar (web)</h2>
+            <p class="about__text">
+              1) Instale o Node.js (>= 16).<br />
+              2) Instale dependencias:
+            </p>
+            <pre><code>npm install</code></pre>
+            <p class="about__text">
+              3) Rode:
+            </p>
+            <pre><code>npm start</code></pre>
+            <p class="about__text">
+              Acesse <code>http://localhost:3000</code>.
+            </p>
+
+            <h2 class="about__subtitle">Como executar (terminal)</h2>
+            <pre><code>node bot.js</code></pre>
+
+            <h2 class="about__subtitle">Armazenamento</h2>
+            <p class="about__text">
+              As conversas ficam em <code>data/conversations.json</code>.
+            </p>
+
+            <h2 class="about__subtitle">Proximos passos</h2>
+            <p class="about__text">
+              - Integrar com OpenRouter (LLM) para respostas mais flexiveis.<br />
+              - Conectar um provedor de WhatsApp quando for definido.<br />
+              - Migrar o armazenamento para banco se precisar.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

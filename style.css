@@ -74,7 +74,7 @@ body {
 
 #home > :not(.particles-layer) {
   position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 
 h1, h2, p {
@@ -229,7 +229,6 @@ img {
 }
 
 .home__img {
-  order: 1;
   width: 305px;
 }
 
@@ -249,6 +248,7 @@ img {
   line-height: 1.2;
   margin-bottom: var(--mb-4);
 }
+
 
 .home__title-color {
   color: var(--first-color);
@@ -868,3 +868,9 @@ img {
   left: 0;
   z-index: var(--z-back);
 }
+
+/* Cor do cursor da animação de texto */
+.typed-cursor {
+  color: var(--first-color);
+}
+
