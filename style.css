@@ -268,6 +268,15 @@ img {
 .home__social-icon {
   font-size: 1.5rem;
   color: var(--second-color);
+  animation: float 3.2s ease-in-out infinite;
+}
+
+.home__social-icon:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.home__social-icon:nth-child(2) {
+  animation-delay: 0.5s;
 }
 
 .home__social-icon:hover {
@@ -370,6 +379,7 @@ img {
   margin-right: var(--mb-2);
   color: var(--first-color);
 }
+
 
 .skills__names {
   display: flex;
@@ -899,7 +909,11 @@ img {
 
 /* Cor do cursor da animação de texto */
 .typed-cursor {
-  color: var(--first-color);
+  color: transparent;
+  background: linear-gradient(180deg, #6d4bff 0%, #9b5cff 45%, #c26bff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
 }
 
 /* ===== ANIMATED CONTACT FORM (Refined) ===== */
@@ -1134,7 +1148,7 @@ img {
   transition: transform 0.5s ease-in-out;
   width: max-content;
   gap: 1.5rem;
-  animation: skills-marquee 18s linear infinite;
+  animation: skills-marquee var(--marquee-duration, 18s) linear infinite;
   flex-wrap: nowrap; /* Garante que os itens não quebrem linha */
 }
 
@@ -1152,6 +1166,23 @@ img {
   width: 80px; /* Largura fixa para cada item */
   height: 80px; /* Altura fixa para cada item */
 }
+
+.skills__icon-image {
+  width: 56px;
+  height: 56px;
+  max-width: 56px;
+  max-height: 56px;
+  object-fit: contain;
+  display: block;
+}
+
+.skills__icon-item.icon-aws .skills__icon-image {
+  width: 64px;
+  height: 64px;
+  max-width: 64px;
+  max-height: 64px;
+}
+
 
 .skills__icon-item:hover {
   transform: translateY(-5px) scale(1.1);
@@ -1222,8 +1253,10 @@ img {
 .skills__icon-item i.bxl-html5 { color: #E34F26; } /* HTML5 */
 .skills__icon-item i.bxl-css3 { color: #1572B6; } /* CSS3 */
 .skills__icon-item i.bxl-javascript { color: #F7DF1E; } /* JavaScript */
-.skills__icon-item i.bxl-python { color: #3776AB; } /* Python */
-.skills__icon-item i.bxl-java { color: #007396; } /* Java */
+div.skills__icon-item i.bxl-python { color: #3776AB !important; } /* Python */
+div.skills__icon-item i.bxl-java { color: #007396 !important; } /* Java */
+.skills__icon-item.icon-python i { color: #3776AB !important; } /* Python (fallback) */
+.skills__icon-item.icon-java i { color: #007396 !important; } /* Java (fallback) */
 .skills__icon-item i.bxl-react { color: #61DAFB; } /* React */
 .skills__icon-item i.bxl-nodejs { color: #339933; } /* Node.js */
 .skills__icon-item i.bxs-bar-chart-alt-2 { color: #F2C811; } /* Power BI (representativo) */
@@ -1231,18 +1264,42 @@ img {
 .skills__icon-item i.bxl-git { color: #F05032; } /* Git */
 .skills__icon-item i.bxl-github { color: #181717; } /* GitHub */
 .skills__icon-item i.bxl-docker { color: #2496ED; } /* Docker */
+.skills__icon-carousel .bxl-python,
+.skills__icon-carousel .bxl-python::before {
+  color: #3776AB !important;
+}
+
+.skills__icon-carousel .bxl-java,
+.skills__icon-carousel .bxl-java::before {
+  color: #007396 !important;
+}
+.skills__icon-item.icon-python,
+.skills__icon-item.icon-python i { color: #3776AB !important; } /* Python */
+.skills__icon-item.icon-java,
+.skills__icon-item.icon-java i { color: #007396 !important; } /* Java */
 
 /* Ajustar a cor base do ícone para não sobrescrever */
 .skills__icon-item {
   /* color: unset; */ /* Remove a cor padrão para que as cores específicas funcionem */
 }
 
+
 @keyframes skills-marquee {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(var(--marquee-shift, -50%));
   }
 }
+
+
+
+
+
+
+
+
+
+
 

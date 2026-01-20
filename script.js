@@ -261,18 +261,57 @@ function initAllEffects() {
             detectRetina: true,
         });
     }
+
+    if (!document.body.dataset.skillsMarqueeBound) {
+        window.addEventListener('load', () => initSkillsIconMarquee(true));
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => initSkillsIconMarquee(true), 150);
+        });
+        document.body.dataset.skillsMarqueeBound = 'true';
+    }
 }
 
 /*===== SKILLS ICON MARQUEE =====*/
-function initSkillsIconMarquee() {
+function initSkillsIconMarquee(force = false) {
     const wrapper = document.querySelector('.skills__icon-wrapper');
+    const carousel = document.querySelector('.skills__icon-carousel');
 
-    if (!wrapper || wrapper.dataset.marqueeInitialized) {
+    if (!wrapper || !carousel || (!force && wrapper.dataset.marqueeInitialized)) {
         return;
     }
 
-    const items = Array.from(wrapper.children);
-    items.forEach(item => wrapper.appendChild(item.cloneNode(true)));
+    if (!wrapper.dataset.baseHtml) {
+        wrapper.dataset.baseHtml = wrapper.innerHTML;
+    }
+
+    wrapper.style.animation = 'none';
+    wrapper.innerHTML = wrapper.dataset.baseHtml;
+
+    const baseItems = Array.from(wrapper.children);
+    if (baseItems.length === 0) {
+        return;
+    }
+
+    // Ensure base set fills the visible area before cloning.
+    while (wrapper.scrollWidth < carousel.clientWidth) {
+        baseItems.forEach(item => wrapper.appendChild(item.cloneNode(true)));
+    }
+
+    const baseWidth = wrapper.scrollWidth;
+    wrapper.insertAdjacentHTML('beforeend', wrapper.innerHTML);
+
+    const speed = 70; // px per second
+    const duration = Math.max(18, baseWidth / speed);
+    wrapper.style.setProperty('--marquee-duration', `${duration}s`);
+    wrapper.style.setProperty('--marquee-shift', `${-baseWidth}px`);
+
+    // Re-enable animation after DOM changes.
+    requestAnimationFrame(() => {
+        wrapper.style.animation = '';
+    });
+
     wrapper.dataset.marqueeInitialized = 'true';
 }
 
