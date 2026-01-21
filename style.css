@@ -889,10 +889,26 @@ body.theme-dark .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  animation: pulse-cta 2.2s ease-in-out infinite;
 }
 
 .contact__cta-button:hover {
   transform: translateY(-2px);
+}
+
+@keyframes pulse-cta {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(77, 54, 208, 0.65);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 18px rgba(77, 54, 208, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(77, 54, 208, 0);
+  }
 }
 
 body.theme-dark .contact {
@@ -976,6 +992,7 @@ body.theme-dark .contact__cta {
 @media screen and (max-width: 320px) {
   /* Small mobile adjustments if needed */
 }
+
 
 @media screen and (min-width: 576px) {
   .about__container {

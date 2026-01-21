@@ -196,11 +196,13 @@ function initWorkCarouselControls() {
 
 function initAllEffects() {
     // Aplicar animações do ScrollReveal
-    sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
-    sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 200}); 
+    sr.reveal('.home__data, .skills__subtitle, .skills__text',{}); 
+    sr.reveal('.home__img, .skills__img',{delay: 200}); 
     sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
     sr.reveal('.skills__data, .contact__item, .contact__cta',{interval: 100}); 
     sr.reveal('.work__card', {origin: 'bottom', interval: 200}); 
+    sr.reveal('.about__img', { origin: 'left', distance: '80px', reset: true });
+    sr.reveal('.about__subtitle, .about__text, .about__button', { origin: 'bottom', distance: '60px', reset: true, interval: 120 });
     
     // Inicializar efeitos 3D nos cards de trabalho
     initWorkCardEffects();
