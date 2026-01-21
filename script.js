@@ -200,7 +200,13 @@ function initAllEffects() {
     sr.reveal('.home__img, .skills__img',{delay: 200}); 
     sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
     sr.reveal('.skills__data, .contact__item, .contact__cta',{interval: 100}); 
-    sr.reveal('.work__card', {origin: 'bottom', interval: 200}); 
+    sr.reveal('.work__card', {
+        origin: 'bottom',
+        interval: 200,
+        reset: true,
+        beforeReveal: (el) => el.classList.add('whip-effect'),
+        beforeReset: (el) => el.classList.remove('whip-effect'),
+    }); 
     sr.reveal('.about__img', { origin: 'left', distance: '80px', reset: true });
     sr.reveal('.about__subtitle, .about__text, .about__button', { origin: 'bottom', distance: '60px', reset: true, interval: 120 });
     
@@ -212,7 +218,7 @@ function initAllEffects() {
     // Inicializar a animação de texto Typed.js
     if (document.getElementById('typed-text')) {
         new Typed('#typed-text', {
-            strings: ['Desenvolvedor <span class="home__title-color">Full Stack</span>', 'Engenharia de <span class="home__title-color">Software</span>', 'Data <span class="home__title-color">Analyst</span>'],
+            strings: ['<span class="home__title-color">Full Stack</span> Developer', '<span class="home__title-color">Software</span> Engineering', 'Data <span class="home__title-color">Analyst</span>'],
             typeSpeed: 70,
             backSpeed: 50,
             backDelay: 1500,

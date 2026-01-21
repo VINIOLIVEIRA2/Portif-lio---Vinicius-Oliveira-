@@ -594,11 +594,14 @@ body.theme-dark .btn {
 
 .work__container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
   gap: 1.5rem;
   padding: 2rem 1.5rem 2.5rem;
   width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar for a cleaner look */
@@ -615,7 +618,7 @@ body.theme-dark .btn {
   position: relative;
   display: flex;
   align-items: center;
-  --work-card-width: 280px;
+  --work-card-width: 240px;
   --work-card-gap: 1.5rem;
   max-width: 100%;
   margin: 0 auto;
@@ -678,6 +681,34 @@ body.theme-dark .btn {
   width: var(--work-card-width);
   flex-shrink: 0;
   scroll-snap-align: start; /* Optional: for snapping effect */
+}
+
+.work__card.whip-effect {
+  transform-origin: left center;
+  animation: whip-in 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1;
+}
+
+.work__card.whip-effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.22), rgba(59, 130, 246, 0.08));
+  opacity: 0;
+  animation: whip-flare 1.6s ease-out 1;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes whip-in {
+  0% { transform: translateX(-80px) rotate(-4deg) scale(0.96); filter: blur(1px); opacity: 0; }
+  70% { transform: translateX(8px) rotate(1deg) scale(1.01); filter: blur(0); opacity: 1; }
+  100% { transform: translateX(0) rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes whip-flare {
+  0% { opacity: 0; transform: translateX(-10%); }
+  40% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateX(10%); }
 }
 
 .work__card:hover {
@@ -1127,8 +1158,13 @@ body.theme-dark .contact__cta {
 }
 
 @media screen and (min-width: 768px) {
+  .work__card {
+    width: auto;
+    max-width: 260px;
+  }
+
   .work__arrow {
-    display: none;
+    display: flex;
   }
 
   .work__container {
