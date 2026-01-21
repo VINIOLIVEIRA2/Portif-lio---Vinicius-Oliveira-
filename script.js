@@ -11,6 +11,34 @@ const showMenu = (toggleId, navId) =>{
 }
 showMenu('nav-toggle','nav-menu')
 
+/*==================== THEME TOGGLE ====================*/
+const themeToggle = document.getElementById('theme-toggle');
+const storedTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+const applyTheme = (mode) => {
+    document.body.classList.toggle('theme-dark', mode === 'dark');
+    if (themeToggle) {
+        themeToggle.setAttribute('aria-pressed', mode === 'dark');
+        themeToggle.textContent = mode === 'dark' ? 'Light' : 'Dark';
+    }
+};
+
+if (storedTheme) {
+    applyTheme(storedTheme);
+} else if (prefersDark) {
+    applyTheme('dark');
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('theme-dark');
+        const nextTheme = isDark ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
+    });
+}
+
 /*==================== REMOVE MENU MOBILE ====================*/
 const navLink = document.querySelectorAll('.nav__link')
 
@@ -171,7 +199,7 @@ function initAllEffects() {
     sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
     sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 200}); 
     sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
-    sr.reveal('.skills__data, .contact__input',{interval: 100}); 
+    sr.reveal('.skills__data, .contact__item, .contact__cta',{interval: 100}); 
     sr.reveal('.work__card', {origin: 'bottom', interval: 200}); 
     
     // Inicializar efeitos 3D nos cards de trabalho
