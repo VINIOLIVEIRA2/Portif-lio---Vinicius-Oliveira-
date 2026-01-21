@@ -1,5 +1,5 @@
 /*===== GOOGLE FONTS =====*/
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Sora:wght@500;600;700;800&display=swap");
 
 /*===== VARIABLES CSS =====*/
 :root {
@@ -234,47 +234,85 @@ img {
 }
 
 .btn {
-  border: none;
-  width: 15em;
-  height: 5em;
-  border-radius: 3em;
-  display: flex;
+  border: 1px solid rgba(76, 29, 149, 0.35);
+  min-width: 6.8rem;
+  height: 2.1rem;
+  padding: 0 0.85rem;
+  border-radius: 999px;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
-  background: #1c1a1c;
+  gap: 0.4rem;
+  background: linear-gradient(135deg, #eef2ff, #dbeafe);
+  color: #111827;
   cursor: pointer;
-  transition: all 450ms ease-in-out;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 26px rgba(37, 99, 235, 0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .sparkle {
-  fill: #aaaaaa;
-  transition: all 800ms ease;
+  fill: currentColor;
+  transition: transform 0.5s ease, fill 0.5s ease;
 }
 
 .text {
-  font-weight: 600;
-  color: #aaaaaa;
-  font-size: medium;
+  font-weight: 800;
+  color: currentColor;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: "Sora", sans-serif;
 }
 
 .btn:hover {
-  background: linear-gradient(0deg, #a47cf3, #683fea);
+  border-color: rgba(124, 108, 232, 0.7);
+  background: linear-gradient(135deg, #6b59ff, #8b5cf6);
+  color: #ffffff;
   box-shadow:
     inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
     inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
-    0px 0px 0px 4px rgba(255, 255, 255, 0.2),
-    0px 0px 180px 0px #9917ff;
+    0px 0px 0px 4px rgba(121, 95, 255, 0.18),
+    0px 20px 45px -18px rgba(121, 95, 255, 0.85);
   transform: translateY(-2px);
 }
 
 .btn:hover .text {
-  color: white;
+  color: #ffffff;
 }
 
 .btn:hover .sparkle {
-  fill: white;
-  transform: scale(1.2);
+  fill: #ffffff;
+  transform: rotate(-12deg) scale(1.12);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -120% -30% auto;
+  height: 220%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.6s ease;
+  transform: translateY(-20%);
+}
+
+.btn:hover::before {
+  opacity: 1;
+  transform: translateY(10%);
+}
+
+body.theme-dark .btn {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #111827, #1f2937);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 /*Active menu*/
@@ -1140,6 +1178,13 @@ body.theme-dark .contact__cta {
     rgba(77, 54, 208, 1) 0%,
     rgba(132, 116, 254, 1) 100%
   );
+}
+
+.button.theme-toggle {
+  width: auto;
+  min-width: 7.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
 }
 
 .button__icon {
