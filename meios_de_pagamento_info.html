@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Projeto - Meios de Pagamento</title>
+    <title>Detalhes do Projeto - Sistema de Pagamento</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* Adicionando alguns estilos específicos para esta página */
@@ -53,29 +53,34 @@
 </head>
 <body>
     <div class="project-container">
-        <h1>Meios de Pagamento</h1>
-        
-        <p>Este projeto consiste em uma API robusta para processamento de pagamentos online, suportando os métodos mais populares como Cartão de Crédito e Pix.</p>
-        <p>A solução foi desenvolvida para ser segura, escalável e de fácil integração com plataformas de e-commerce e outros sistemas que necessitem de uma gateway de pagamento.</p>
+        <h1>💳 Sistema de Pagamento</h1>
 
-        <h2>🛠️ Tecnologias Utilizadas</h2>
+        <p>API REST de pagamentos online desenvolvida com Node.js + NestJS, simulando um fluxo real de e-commerce com pedidos, pagamentos e webhooks.</p>
+        <p>Este projeto representa a base arquitetural usada em sistemas reais de pagamento (Pix, crédito, débito), sem uso de dinheiro real.</p>
+
+        <h2>🚀 Funcionalidades</h2>
         <ul>
-            <li><strong>Node.js</strong> → Ambiente de execução para o back-end</li>
-            <li><strong>Express.js</strong> → Framework para construção da API RESTful</li>
-            <li><strong>Stripe API</strong> → Integração para processamento seguro de pagamentos com cartão de crédito</li>
-            <li><strong>API do Banco Central</strong> → Para geração de QR Codes e validação de pagamentos Pix</li>
+            <li>Criação de produtos e pedidos</li>
+            <li>Geração de pagamentos (pending)</li>
+            <li>Confirmação assíncrona via webhook</li>
+            <li>Arquitetura modular (Products, Orders, Payments)</li>
         </ul>
 
-        <h2>✅ Funcionalidades Principais</h2>
+        <h2>🧠 Conceitos Aplicados</h2>
         <ul>
-            <li>Processamento de transações com Cartão de Crédito</li>
-            <li>Geração de cobranças Pix (QR Code dinâmico)</li>
-            <li>Webhooks para notificação de status de pagamento</li>
-            <li>Arquitetura segura e focada em performance</li>
-            <li>Endpoint para estorno de transações</li>
+            <li>API REST</li>
+            <li>Pagamentos assíncronos</li>
+            <li>Webhooks</li>
+            <li>Separação de responsabilidades</li>
+            <li>Backend preparado para integração com gateways reais (Stripe, Pix)</li>
         </ul>
 
-        <p>Este projeto demonstra a capacidade de construir soluções financeiras complexas e seguras, utilizando tecnologias modernas de back-end e integrando-se com APIs de mercado consolidadas.</p>
+        <h2>⚙️ Tecnologias</h2>
+        <ul>
+            <li>Node.js</li>
+            <li>NestJS</li>
+            <li>TypeScript</li>
+        </ul>
 
         <div class="back-button-container">
             <a href="index.html" class="button">Voltar ao Portfólio</a>
