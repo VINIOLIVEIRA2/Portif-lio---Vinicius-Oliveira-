@@ -14,7 +14,6 @@ showMenu('nav-toggle','nav-menu')
 /*==================== THEME TOGGLE ====================*/
 const themeToggle = document.getElementById('theme-toggle');
 const storedTheme = localStorage.getItem('theme');
-const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const applyTheme = (mode) => {
     document.body.classList.toggle('theme-dark', mode === 'dark');
@@ -26,7 +25,7 @@ const applyTheme = (mode) => {
 
 if (storedTheme) {
     applyTheme(storedTheme);
-} else if (prefersDark) {
+} else {
     applyTheme('dark');
 }
 
@@ -200,19 +199,13 @@ function initAllEffects() {
     sr.reveal('.home__img, .skills__img',{delay: 200}); 
     sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
     sr.reveal('.skills__data, .contact__item, .contact__cta',{interval: 100}); 
-    sr.reveal('.work__card', {
-        origin: 'bottom',
-        interval: 200,
-        reset: true,
-        beforeReveal: (el) => el.classList.add('whip-effect'),
-        beforeReset: (el) => el.classList.remove('whip-effect'),
-    }); 
     sr.reveal('.about__img', { origin: 'left', distance: '80px', reset: true });
     sr.reveal('.about__subtitle, .about__text, .about__button', { origin: 'bottom', distance: '60px', reset: true, interval: 120 });
     
     // Inicializar efeitos 3D nos cards de trabalho
     initWorkCardEffects();
     initWorkCarouselControls();
+    initWorkCardWhip();
     initSkillsIconMarquee(); // Carrossel continuo de icones
 
     // Inicializar a animação de texto Typed.js
@@ -307,6 +300,33 @@ function initAllEffects() {
         });
         document.body.dataset.skillsMarqueeBound = 'true';
     }
+}
+
+function initWorkCardWhip() {
+    const cards = document.querySelectorAll('.work__card');
+    if (!cards.length || window.IntersectionObserver === undefined) {
+        return;
+    }
+
+    if (document.body.dataset.workWhipInitialized) {
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('whip-effect');
+            } else {
+                entry.target.classList.remove('whip-effect');
+            }
+        });
+    }, {
+        threshold: 0.4,
+        rootMargin: '0px',
+    });
+
+    cards.forEach((card) => observer.observe(card));
+    document.body.dataset.workWhipInitialized = 'true';
 }
 
 /*===== SKILLS ICON MARQUEE =====*/
