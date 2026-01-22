@@ -129,68 +129,39 @@ function initWorkCardEffects() {
 // Função para inicializar todos os efeitos que dependem do DOM
 /*===== WORK CAROUSEL CONTROLS =====*/
 function initWorkCarouselControls() {
-    const carousel = document.getElementById('work-carousel');
-    const prevBtn = document.querySelector('.work__arrow--left');
-    const nextBtn = document.querySelector('.work__arrow--right');
+    const carousels = document.querySelectorAll('.work__carousel');
 
-    if (!carousel || !prevBtn || !nextBtn || carousel.dataset.carouselInitialized) {
-        return;
-    }
+    carousels.forEach((carousel) => {
+        const track = carousel.querySelector('[data-work-carousel]');
+        const prevBtn = carousel.querySelector('.work__arrow--left');
+        const nextBtn = carousel.querySelector('.work__arrow--right');
 
-    const getScrollAmount = () => {
-        const card = carousel.querySelector('.work__card');
-        if (!card) {
-            return 0;
-        }
-        const styles = window.getComputedStyle(carousel);
-        const gap = parseFloat(styles.gap || styles.columnGap || '0');
-        return card.getBoundingClientRect().width + gap;
-    };
-
-    const scrollByAmount = (direction) => {
-        const amount = getScrollAmount();
-        if (!amount) {
+        if (!track || !prevBtn || !nextBtn || track.dataset.carouselInitialized) {
             return;
         }
-        carousel.scrollBy({ left: direction * amount, behavior: 'smooth' });
-    };
 
-    prevBtn.addEventListener('click', () => scrollByAmount(-1));
-    nextBtn.addEventListener('click', () => scrollByAmount(1));
-    carousel.dataset.carouselInitialized = 'true';
-}
+        const getScrollAmount = () => {
+            const card = track.querySelector('.work__card');
+            if (!card) {
+                return 0;
+            }
+            const styles = window.getComputedStyle(track);
+            const gap = parseFloat(styles.gap || styles.columnGap || '0');
+            return card.getBoundingClientRect().width + gap;
+        };
 
-/*===== WORK CAROUSEL CONTROLS =====*/
-function initWorkCarouselControls() {
-    const carousel = document.getElementById('work-carousel');
-    const prevBtn = document.querySelector('.work__arrow--left');
-    const nextBtn = document.querySelector('.work__arrow--right');
+        const scrollByAmount = (direction) => {
+            const amount = getScrollAmount();
+            if (!amount) {
+                return;
+            }
+            track.scrollBy({ left: direction * amount, behavior: 'smooth' });
+        };
 
-    if (!carousel || !prevBtn || !nextBtn || carousel.dataset.carouselInitialized) {
-        return;
-    }
-
-    const getScrollAmount = () => {
-        const card = carousel.querySelector('.work__card');
-        if (!card) {
-            return 0;
-        }
-        const styles = window.getComputedStyle(carousel);
-        const gap = parseFloat(styles.gap || styles.columnGap || '0');
-        return card.getBoundingClientRect().width + gap;
-    };
-
-    const scrollByAmount = (direction) => {
-        const amount = getScrollAmount();
-        if (!amount) {
-            return;
-        }
-        carousel.scrollBy({ left: direction * amount, behavior: 'smooth' });
-    };
-
-    prevBtn.addEventListener('click', () => scrollByAmount(-1));
-    nextBtn.addEventListener('click', () => scrollByAmount(1));
-    carousel.dataset.carouselInitialized = 'true';
+        prevBtn.addEventListener('click', () => scrollByAmount(-1));
+        nextBtn.addEventListener('click', () => scrollByAmount(1));
+        track.dataset.carouselInitialized = 'true';
+    });
 }
 
 function initAllEffects() {
@@ -198,15 +169,18 @@ function initAllEffects() {
     sr.reveal('.home__data, .skills__subtitle, .skills__text',{}); 
     sr.reveal('.home__img, .skills__img',{delay: 200}); 
     sr.reveal('.home__button, .home__social-icon',{ interval: 100}); 
-    sr.reveal('.skills__data, .contact__item, .contact__cta',{interval: 100}); 
+    sr.reveal('.contact__item, .contact__cta',{interval: 100}); 
+    sr.reveal('.skills__data', { origin: 'left', distance: '80px', reset: true, interval: 120 });
     sr.reveal('.about__img', { origin: 'left', distance: '80px', reset: true });
     sr.reveal('.about__subtitle, .about__text, .about__button', { origin: 'bottom', distance: '60px', reset: true, interval: 120 });
     
     // Inicializar efeitos 3D nos cards de trabalho
     initWorkCardEffects();
     initWorkCarouselControls();
-    initWorkCardWhip();
     initSkillsIconMarquee(); // Carrossel continuo de icones
+    initSkillsBarsAnimation();
+    initWorkCardsPopIn();
+    initProjectModal();
 
     // Inicializar a animação de texto Typed.js
     if (document.getElementById('typed-text')) {
@@ -220,6 +194,7 @@ function initAllEffects() {
             cursorChar: '|',
         });
     }
+
 
     // Inicializar a animação de partículas tsParticles
     if (document.getElementById('particles-bg')) {
@@ -300,6 +275,117 @@ function initAllEffects() {
         });
         document.body.dataset.skillsMarqueeBound = 'true';
     }
+}
+
+function initProjectModal() {
+    const modal = document.getElementById('project-modal');
+    if (!modal) {
+        return;
+    }
+
+    const titleEl = document.getElementById('project-modal-title');
+    const bodyEl = document.getElementById('project-modal-body');
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+    const detailButtons = document.querySelectorAll('.work__card-link-item--details');
+
+    const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+    };
+
+    const openModal = (button) => {
+        const title = button.getAttribute('data-project-title') || '';
+        const desc = button.getAttribute('data-project-desc') || '';
+        const projectId = button.getAttribute('data-project-id');
+        if (titleEl) titleEl.textContent = title;
+        if (bodyEl) {
+            const template = projectId ? document.getElementById(`project-details-${projectId}`) : null;
+            if (template) {
+                bodyEl.innerHTML = template.innerHTML;
+            } else {
+                bodyEl.textContent = desc;
+            }
+        }
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    };
+
+    if (!modal.dataset.bound) {
+        closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
+        modal.dataset.bound = 'true';
+    }
+
+    detailButtons.forEach((button) => {
+        if (button.dataset.bound) {
+            return;
+        }
+        button.addEventListener('click', () => openModal(button));
+        button.dataset.bound = 'true';
+    });
+}
+
+function initWorkCardsPopIn() {
+    const cards = document.querySelectorAll('.work__card');
+    if (!cards.length || window.IntersectionObserver === undefined) {
+        return;
+    }
+
+    if (document.body.dataset.workCardsPopInitialized) {
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+            } else {
+                entry.target.classList.remove('is-revealed');
+            }
+        });
+    }, {
+        threshold: 0.3,
+    });
+
+    cards.forEach((card) => observer.observe(card));
+    document.body.dataset.workCardsPopInitialized = 'true';
+}
+
+function initSkillsBarsAnimation() {
+    const bars = document.querySelectorAll('.skills__bar');
+    if (!bars.length || window.IntersectionObserver === undefined) {
+        return;
+    }
+
+    if (document.body.dataset.skillsBarsInitialized) {
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-animated');
+            } else {
+                entry.target.classList.remove('is-animated');
+            }
+        });
+    }, {
+        threshold: 0.4,
+    });
+
+    bars.forEach((bar) => observer.observe(bar));
+    document.body.dataset.skillsBarsInitialized = 'true';
 }
 
 function initWorkCardWhip() {

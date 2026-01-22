@@ -1,58 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chatbot WhatsApp - Bot de emprestimo/renegociacao (MVP)</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="l-main">
-      <section class="about section" id="chatbot-whatsapp">
-        <h2 class="section-title">Chatbot WhatsApp</h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Projeto - Chatbot WhatsApp</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Adicionando alguns estilos especÃ­ficos para esta pÃ¡gina */
+        body {
+            background-color: hsl(var(--hue-color), 16%, 95%);
+            margin: 0;
+            padding: 2rem;
+            color: var(--second-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .project-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: .5rem;
+            box-shadow: 0 4px 25px rgba(14, 36, 49, 0.15);
+            max-width: 550px;
+            width: 100%;
+        }
+        .project-container h1 {
+            color: var(--first-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .project-container h2 {
+            color: var(--first-color);
+            border-bottom: 2px solid var(--first-color);
+            padding-bottom: .5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .project-container p, .project-container li {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .project-container ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .project-container pre {
+            background: #f4f4f4;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+        .back-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-container">
+        <h1>Chatbot WhatsApp</h1>
 
-        <div class="about__container bd-grid">
-          <div>
-            <h2 class="about__subtitle">Bot de emprestimo/renegociacao (MVP)</h2>
-            <p class="about__text">
-              Este MVP tem duas formas de uso:
-            </p>
-            <p class="about__text">
-              - Terminal: fluxo simples no console.<br />
-              - Web: interface com chat no navegador.
-            </p>
+        <p>Bot de emprÃ©stimo/renegociaÃ§Ã£o (MVP) com duas formas de uso: terminal (fluxo simples no console) e web (interface de chat no navegador).</p>
 
-            <h2 class="about__subtitle">Como executar (web)</h2>
-            <p class="about__text">
-              1) Instale o Node.js (>= 16).<br />
-              2) Instale dependencias:
-            </p>
-            <pre><code>npm install</code></pre>
-            <p class="about__text">
-              3) Rode:
-            </p>
-            <pre><code>npm start</code></pre>
-            <p class="about__text">
-              Acesse <code>http://localhost:3000</code>.
-            </p>
+        <h2>Como executar (web)</h2>
+        <ul>
+            <li>Instale o Node.js (>= 16).</li>
+            <li>Instale as dependÃªncias:</li>
+        </ul>
+        <pre><code>npm install</code></pre>
+        <ul>
+            <li>Rode:</li>
+        </ul>
+        <pre><code>npm start</code></pre>
+        <p>Acesse <code>http://localhost:3000</code>.</p>
 
-            <h2 class="about__subtitle">Como executar (terminal)</h2>
-            <pre><code>node bot.js</code></pre>
+        <h2>Como executar (terminal)</h2>
+        <pre><code>node bot.js</code></pre>
 
-            <h2 class="about__subtitle">Armazenamento</h2>
-            <p class="about__text">
-              As conversas ficam em <code>data/conversations.json</code>.
-            </p>
+        <h2>Armazenamento</h2>
+        <p>As conversas ficam em <code>data/conversations.json</code>.</p>
 
-            <h2 class="about__subtitle">Proximos passos</h2>
-            <p class="about__text">
-              - Integrar com OpenRouter (LLM) para respostas mais flexiveis.<br />
-              - Conectar um provedor de WhatsApp quando for definido.<br />
-              - Migrar o armazenamento para banco se precisar.
-            </p>
-          </div>
+        <h2>PrÃ³ximos passos</h2>
+        <ul>
+            <li>Integrar com OpenRouter (LLM) para respostas mais flexÃ­veis.</li>
+            <li>Conectar um provedor de WhatsApp quando for definido.</li>
+            <li>Migrar o armazenamento para banco se precisar.</li>
+        </ul>
+
+        <div class="back-button-container">
+            <a href="index.html" class="button">Voltar ao PortfÃ³lio</a>
         </div>
-      </section>
-    </main>
-  </body>
+    </div>
+</body>
 </html>
