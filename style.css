@@ -769,6 +769,7 @@ body.theme-dark .btn {
   color: #fff;
   width: 100%;
   flex-shrink: 0;
+  aspect-ratio: 4 / 5;
   opacity: 0;
   transform: scale(0.92);
 }
