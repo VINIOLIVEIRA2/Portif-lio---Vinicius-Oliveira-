@@ -830,6 +830,16 @@ body.theme-dark .btn {
   transform: scale(1.1);
 }
 
+.work__card-img--sonic {
+  object-fit: cover;
+  object-position: center 35%;
+  transform: scale(1.08);
+}
+
+.work__card:hover .work__card-img--sonic {
+  transform: scale(1.14);
+}
+
 /* Data container overlay */
 .work__card-data {
   position: absolute;
@@ -977,6 +987,9 @@ body.theme-dark .btn {
   text-align: left;
   transform: scale(0.96);
   transition: transform 0.25s ease;
+  max-height: 85vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .project-modal.is-open .project-modal__content {
@@ -1803,6 +1816,13 @@ body.theme-dark .contact__cta {
   height: 64px;
   max-width: 64px;
   max-height: 64px;
+}
+
+.skills__icon-item.icon-postgresql .skills__icon-image {
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  max-height: 60px;
 }
 
 
