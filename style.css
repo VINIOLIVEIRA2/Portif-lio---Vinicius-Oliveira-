@@ -497,6 +497,7 @@ body.theme-dark .btn {
 .skills__data:nth-of-type(7) { animation-delay: 2.4s; }
 .skills__data:nth-of-type(8) { animation-delay: 2.8s; }
 .skills__data:nth-of-type(9) { animation-delay: 3.2s; }
+.skills__data:nth-of-type(10) { animation-delay: 3.6s; }
 
 .skills__data:hover {
   transform: translateY(-8px) scale(1.05); /* Levanta e escala um pouco mais */
@@ -577,6 +578,10 @@ body.theme-dark .btn {
 
 .skills__java {
   width: 75%;
+}
+
+.skills__tailwind {
+  width: 80%;
 }
 
 .skills__bar.is-animated {
@@ -1823,6 +1828,14 @@ body.theme-dark .contact__cta {
   height: 60px;
   max-width: 60px;
   max-height: 60px;
+}
+
+.skills__icon-svg {
+  width: 2rem;
+  height: 2rem;
+  margin-right: var(--mb-2);
+  display: inline-block;
+  fill: currentColor;
 }
 
 
