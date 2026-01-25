@@ -178,6 +178,7 @@ function initAllEffects() {
     initWorkCardEffects();
     initWorkCarouselControls();
     initSkillsIconMarquee(); // Carrossel continuo de icones
+    setupSkillsMarqueeAutoRefresh();
     initSkillsBarsAnimation();
     initWorkCardsPopIn();
     initProjectModal();
@@ -266,15 +267,6 @@ function initAllEffects() {
         });
     }
 
-    if (!document.body.dataset.skillsMarqueeBound) {
-        window.addEventListener('load', () => initSkillsIconMarquee(true));
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => initSkillsIconMarquee(true), 150);
-        });
-        document.body.dataset.skillsMarqueeBound = 'true';
-    }
 }
 
 function initProjectModal() {
@@ -431,23 +423,36 @@ function initSkillsIconMarquee(force = false) {
     wrapper.style.animation = 'none';
     wrapper.innerHTML = wrapper.dataset.baseHtml;
 
-    const baseItems = Array.from(wrapper.children);
-    if (baseItems.length === 0) {
+    const baseHtml = wrapper.dataset.baseHtml;
+    if (!baseHtml || !baseHtml.trim()) {
         return;
     }
 
-    // Ensure base set fills the visible area before cloning.
-    while (wrapper.scrollWidth < carousel.clientWidth) {
-        baseItems.forEach(item => wrapper.appendChild(item.cloneNode(true)));
+    const gapValue = parseFloat(getComputedStyle(wrapper).gap || '0');
+    const baseItems = Array.from(wrapper.children);
+    let baseWidth = baseItems.reduce((total, item) => {
+        return total + item.getBoundingClientRect().width;
+    }, 0);
+    if (baseItems.length > 1 && gapValue) {
+        baseWidth += gapValue * (baseItems.length - 1);
     }
 
-    const baseWidth = wrapper.scrollWidth;
-    wrapper.insertAdjacentHTML('beforeend', wrapper.innerHTML);
+    if (!baseWidth) {
+        return;
+    }
+
+    const carouselWidth = carousel.clientWidth;
+    const repeatCount = Math.max(1, Math.ceil((carouselWidth + baseWidth) / baseWidth));
+    const baseSetHtml = Array(repeatCount).fill(baseHtml).join('');
+    const baseSetWidth = baseWidth * repeatCount;
+
+    wrapper.innerHTML = baseSetHtml + baseSetHtml;
+    wrapper.style.width = `${baseSetWidth * 2}px`;
 
     const speed = 70; // px per second
-    const duration = Math.max(18, baseWidth / speed);
+    const duration = Math.max(18, baseSetWidth / speed);
     wrapper.style.setProperty('--marquee-duration', `${duration}s`);
-    wrapper.style.setProperty('--marquee-shift', `${-baseWidth}px`);
+    wrapper.style.setProperty('--marquee-shift', `${-Math.round(baseSetWidth)}px`);
 
     // Re-enable animation after DOM changes.
     requestAnimationFrame(() => {
@@ -457,7 +462,56 @@ function initSkillsIconMarquee(force = false) {
     wrapper.dataset.marqueeInitialized = 'true';
 }
 
+function setupSkillsMarqueeAutoRefresh() {
+    const wrapper = document.querySelector('.skills__icon-wrapper');
+    const carousel = document.querySelector('.skills__icon-carousel');
+
+    if (!wrapper || !carousel || carousel.dataset.marqueeAutoRefresh) {
+        return;
+    }
+
+    carousel.dataset.marqueeAutoRefresh = 'true';
+
+    let refreshTimer;
+    const scheduleRefresh = () => {
+        clearTimeout(refreshTimer);
+        refreshTimer = setTimeout(() => initSkillsIconMarquee(true), 60);
+    };
+
+    const images = Array.from(wrapper.querySelectorAll('img'));
+    let pending = 0;
+
+    images.forEach((img) => {
+        if (img.complete) {
+            return;
+        }
+
+        pending += 1;
+        const onDone = () => {
+            pending -= 1;
+            if (pending <= 0) {
+                scheduleRefresh();
+            }
+        };
+
+        img.addEventListener('load', onDone, { once: true });
+        img.addEventListener('error', onDone, { once: true });
+    });
+
+    if (pending === 0) {
+        scheduleRefresh();
+    }
+
+    if (window.ResizeObserver) {
+        const observer = new ResizeObserver(scheduleRefresh);
+        observer.observe(carousel);
+        observer.observe(wrapper);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', initAllEffects);
+
+// Auto refresh do carrossel é tratado em setupSkillsMarqueeAutoRefresh().
 
 
 
