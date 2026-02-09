@@ -367,6 +367,9 @@ body.theme-dark .btn {
   margin-right: auto;
   justify-self: center;
   align-self: center;
+  opacity: 0;
+  transform: scale(0.92);
+  animation: home-img-in 900ms ease-out 200ms forwards;
 }
 
 .home__social {
@@ -426,6 +429,16 @@ body.theme-dark .btn {
   transform: scale(1.5) translate(-5px, 0px);
 }
 
+@keyframes home-img-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 .button:hover {
   box-shadow: 0px 10px 36px rgba(0, 0, 0, 0.15);
